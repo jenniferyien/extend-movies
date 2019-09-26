@@ -1,14 +1,16 @@
-import {fetchPopularMoviesPending, fetchPopularMoviesSuccess, fetchPopularMoviesError} from '../actions/popularMoviesactions';
 import queryString from 'query-string'
+import { API_KEY, LANGUAGE_DEFAULT, DEFAULT_DISCOVER, DEFAULT_SORT } from '../constants'
+import {fetchPopularMoviesPending, fetchPopularMoviesSuccess, fetchPopularMoviesError} from '../actions/popularMoviesActions';
 
-const API_KEY = 'aa0ea741dcbdabdf6fd9953b60e629cf'
-
-function fetchPopularMovies(year, sort) {
+function fetchPopularMovies(year = '', sort = DEFAULT_SORT) {
+  if (year === 'All') {
+    year = ''
+  }
   let params = {
     api_key: API_KEY,
-    language: 'en-US',
-    sort_by: 'popularity.desc',
-    primary_release_year: ''
+    language: LANGUAGE_DEFAULT,
+    sort_by: `${DEFAULT_DISCOVER}.${sort}`,
+    primary_release_year: year
   }
     return dispatch => {
         dispatch(fetchPopularMoviesPending());
@@ -20,7 +22,7 @@ function fetchPopularMovies(year, sort) {
             }
             // pass only top 10 results
             let top10 = res.results.slice(0,10)
-            dispatch(fetchPopularMoviesSuccess(top10));
+            dispatch(fetchPopularMoviesSuccess(top10, year, sort));
             return top10;
         })
         .catch(error => {

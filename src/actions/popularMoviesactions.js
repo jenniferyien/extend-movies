@@ -8,11 +8,13 @@ export function fetchPopularMoviesPending() {
     }
 }
 
-export function fetchPopularMoviesSuccess(movies) {
+export function fetchPopularMoviesSuccess(movies, year, sort) {
 
     return {
         type: FETCH_POPULAR_MOVIES_SUCCESS,
-        movies: movies
+        movies: movies,
+        year: year,
+        sort_by: sort
     }
 }
 

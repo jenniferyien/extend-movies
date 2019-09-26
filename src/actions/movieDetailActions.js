@@ -9,7 +9,6 @@ export function fetchMovieDetailPending() {
 }
 
 export function fetchMovieDetailSuccess(movie) {
-
     return {
         type: FETCH_MOVIE_DETAIL_SUCCESS,
         movie: movie

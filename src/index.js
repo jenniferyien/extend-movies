@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { applyMiddleware, createStore } from "redux";
 import thunk from 'redux-thunk';
-import { reducer } from "./reducer";
-import App from './components/App';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import PopularMoviesList from './components/PopularMoviesList'
+
 import MovieDetail from './components/MovieDetail'
-// import './index.css';
+import PopularMoviesList from './components/PopularMoviesList'
+import { reducer } from "./reducer";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const middlewares = [thunk];
 const store = createStore(reducer, applyMiddleware(...middlewares));

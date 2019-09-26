@@ -5,3 +5,6 @@ query-string
 
 react-router-dom
 font-awesome
+node-sass
+prop-types
+react-bootstrap

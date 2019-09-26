@@ -1,17 +1,35 @@
+import PropTypes from "prop-types";
 import React, { Component } from 'react';
-import './App.css';
-import fetchPopularMoviesAction from '../dispatch/fetchPopularMovies';
-import {getPopularMoviesError, getPopularMovies, getPopularMoviesPending} from '../reducer';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+
+import DropdownSelector from './DropdownSelector'
 import LoadingSpinner from './LoadingSpinner'
-import { Link } from "react-router-dom";
+
+import { All_YEARS, SORT_BY } from '../constants'
+import fetchPopularMoviesAction from '../dispatch/fetchPopularMovies';
+import {
+  getPopularMoviesError,
+  getPopularMovies,
+  getPopularMoviesPending,
+  getPopularMoviesYear,
+  getPopularMoviesSort
+} from '../reducer';
 
 
 class PopularMoviesList extends Component {
+  static propTypes = {
+    fetchPopularMovies: PropTypes.func.isRequired,
+    pending: PropTypes.bool.isRequired,
+    movies: PropTypes.array.isRequired,
+    error: PropTypes.object
+  }
+
   constructor(props) {
       super(props);
       this.shouldComponentRender = this.shouldComponentRender.bind(this);
+      this.handleSelectedChange = this.handleSelectedChange.bind(this);
   }
 
   componentWillMount() {
@@ -21,12 +39,18 @@ class PopularMoviesList extends Component {
 
   shouldComponentRender() {
       const {pending} = this.props;
-      if(this.pending === false) return false;
+      if(pending === 'false') return false;
       return true;
   }
-  render() {
+
+  handleSelectedChange(type, value) {
     console.log(this.props)
-    const {movies, error, pending} = this.props;
+    console.log(type, value)
+    const {fetchPopularMovies} = this.props;
+    // fetchPopularMovies(value, 'asc');
+  }
+  render() {
+    const {movies, error, year, sort_by} = this.props;
     if(!this.shouldComponentRender()) return <LoadingSpinner />
 
     return (
@@ -39,6 +63,9 @@ class PopularMoviesList extends Component {
           </li>
         )
       })}
+      <DropdownSelector handleSelectedChange={this.handleSelectedChange} value={year} type='year' options={All_YEARS} />
+      <DropdownSelector handleSelectedChange={this.handleSelectedChange} value={sort_by} type='sort' options={SORT_BY}/>
+
       </div>
     )
   }
@@ -47,7 +74,9 @@ class PopularMoviesList extends Component {
 const mapStateToProps = state => ({
     error: getPopularMoviesError(state),
     movies: getPopularMovies(state),
-    pending: getPopularMoviesPending(state)
+    pending: getPopularMoviesPending(state),
+    year: getPopularMoviesYear(state),
+    sort_by: getPopularMoviesSort(state)
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
