@@ -1,14 +1,17 @@
 import PropTypes from "prop-types";
 import React, { Component } from 'react';
+import { Container, Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
-import DropdownSelector from './DropdownSelector'
-import LoadingSpinner from './LoadingSpinner'
+import DropdownSelector from '../components/DropdownSelector'
+import ErrorInfo from '../components/ErrorInfo'
+import LoadingSpinner from '../components/LoadingSpinner'
+import MovieDisplay from '../components/MovieDisplay'
 
 import { All_YEARS, SORT_BY } from '../constants'
 import fetchPopularMoviesAction from '../dispatch/fetchPopularMovies';
+import sortMoviesAction from '../dispatch/sortMovies'
 import {
   getPopularMoviesError,
   getPopularMovies,
@@ -16,11 +19,12 @@ import {
   getPopularMoviesYear,
   getPopularMoviesSort
 } from '../reducer';
-
+import '../styles/PopularMoviesList.scss'
 
 class PopularMoviesList extends Component {
   static propTypes = {
     fetchPopularMovies: PropTypes.func.isRequired,
+    sortMovies: PropTypes.func.isRequired,
     pending: PropTypes.bool.isRequired,
     movies: PropTypes.array.isRequired,
     error: PropTypes.object
@@ -33,8 +37,8 @@ class PopularMoviesList extends Component {
   }
 
   componentWillMount() {
-      const {fetchPopularMovies} = this.props;
-      fetchPopularMovies();
+      const {fetchPopularMovies, year, sort_by} = this.props;
+      fetchPopularMovies(year, sort_by);
   }
 
   shouldComponentRender() {
@@ -44,29 +48,37 @@ class PopularMoviesList extends Component {
   }
 
   handleSelectedChange(type, value) {
-    console.log(this.props)
-    console.log(type, value)
-    const {fetchPopularMovies} = this.props;
-    // fetchPopularMovies(value, 'asc');
+    let {fetchPopularMovies, movies, sort_by, sortMovies} = this.props;
+    if (type === 'year') {
+      fetchPopularMovies(value, sort_by);
+    } else if (type === 'sort') {
+      sortMovies(movies, value)
+    }
   }
+
   render() {
     const {movies, error, year, sort_by} = this.props;
+    if(error) return <ErrorInfo content={error} />
     if(!this.shouldComponentRender()) return <LoadingSpinner />
 
     return (
-      <div>
-      <h2>Popular Movies List</h2>
-      {movies.map((movie) => {
-        return (
-          <li key={movie.id}>
-            <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
-          </li>
-        )
-      })}
-      <DropdownSelector handleSelectedChange={this.handleSelectedChange} value={year} type='year' options={All_YEARS} />
-      <DropdownSelector handleSelectedChange={this.handleSelectedChange} value={sort_by} type='sort' options={SORT_BY}/>
-
-      </div>
+      <Container>
+        <Row>
+          <Col className='display-list' lg={9}>
+            <Row>
+              {movies.map((movie) => {
+                return (
+                  <MovieDisplay key={movie.id} movie={movie}/>
+                )
+              })}
+            </Row>
+          </Col>
+          <Col lg={3}>
+            <DropdownSelector handleSelectedChange={this.handleSelectedChange} value={year} type='year' options={All_YEARS} />
+            <DropdownSelector handleSelectedChange={this.handleSelectedChange} value={sort_by} type='sort' options={SORT_BY}/>
+          </Col>
+        </Row>
+      </Container>
     )
   }
 }
@@ -80,7 +92,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    fetchPopularMovies: fetchPopularMoviesAction
+    fetchPopularMovies: fetchPopularMoviesAction,
+    sortMovies: sortMoviesAction
 }, dispatch)
 
 export default connect(

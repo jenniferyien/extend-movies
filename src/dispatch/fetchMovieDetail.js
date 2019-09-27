@@ -1,11 +1,12 @@
 import queryString from 'query-string'
-import { API_KEY, LANGUAGE_DEFAULT } from '../constants'
+import { API_KEY, LANGUAGE_DEFAULT, APPEND_VIDEO } from '../constants'
 import {fetchMovieDetailPending, fetchMovieDetailSuccess, fetchMovieDetailError} from '../actions/movieDetailActions';
 
 function fetchMovieDetail(movieId) {
   let params = {
     api_key: API_KEY,
-    language: LANGUAGE_DEFAULT
+    language: LANGUAGE_DEFAULT,
+    append_to_response: APPEND_VIDEO
   }
   return dispatch => {
       dispatch(fetchMovieDetailPending());

@@ -1,0 +1,18 @@
+.movie-display {
+  margin-bottom: 25px;
+  .display {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 350px;
+    display: flex;
+    align-items: flex-end;
+    .movie-title {
+      text-align: center;
+      width: 100%;
+      background-color: rgba(0,0,0,0.5);
+      margin: 0;
+      padding: 20px 10px;
+      color: white;
+    }
+  }
+}

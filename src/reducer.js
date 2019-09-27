@@ -1,4 +1,4 @@
-import {FETCH_POPULAR_MOVIES_PENDING, FETCH_POPULAR_MOVIES_SUCCESS, FETCH_POPULAR_MOVIES_ERROR} from './actions/popularMoviesActions';
+import {FETCH_POPULAR_MOVIES_PENDING, FETCH_POPULAR_MOVIES_SUCCESS, FETCH_POPULAR_MOVIES_ERROR, SORT_MOVIES} from './actions/popularMoviesActions';
 import {FETCH_MOVIE_DETAIL_PENDING, FETCH_MOVIE_DETAIL_SUCCESS, FETCH_MOVIE_DETAIL_ERROR} from './actions/movieDetailActions';
 
 const initialState = {
@@ -16,14 +16,14 @@ const initialState = {
     }
 }
 
-export const getPopularMovies = state => state.movieList.movies;
-export const getPopularMoviesYear = state => state.movieList.year;
-export const getPopularMoviesSort = state => state.movieList.sort_by;
-export const getPopularMoviesPending = state => state.movieList.pending;
-export const getPopularMoviesError = state => state.movieList.error;
 export const getSelectedMovie = state => state.selectedMovie.movie;
-export const getSelectedMoviePending = state => state.selectedMovie.pending;
 export const getSelectedMovieError = state => state.selectedMovie.error;
+export const getSelectedMoviePending = state => state.selectedMovie.pending;
+export const getPopularMovies = state => state.movieList.movies;
+export const getPopularMoviesError = state => state.movieList.error;
+export const getPopularMoviesPending = state => state.movieList.pending;
+export const getPopularMoviesSort = state => state.movieList.sort_by;
+export const getPopularMoviesYear = state => state.movieList.year;
 
 export function reducer(state = initialState, action) {
     switch(action.type) {
@@ -72,8 +72,7 @@ export function reducer(state = initialState, action) {
                 ...state.movieList,
                 pending: false,
                 movies: action.movies,
-                year: action.year,
-                sort_by: action.sort_by
+                year: action.year
               }
 
           }
@@ -89,7 +88,17 @@ export function reducer(state = initialState, action) {
                 }
               }
           }
-        default:
-            return state;
+      case SORT_MOVIES:
+        return {
+            ...state,
+            movieList: {
+              ...state.movieList,
+              pending: false,
+              movies: action.movies,
+              sort_by: action.sort_by
+            }
+        }
+      default:
+          return state;
     }
 }

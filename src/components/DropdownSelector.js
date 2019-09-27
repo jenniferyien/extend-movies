@@ -10,7 +10,7 @@ class DropdownSelector extends Component {
     return (
       <DropdownButton title={value} onSelect={(evt) => handleSelectedChange(type, evt)}>
         { options.map((option) => {
-          return (<Dropdown.Item eventKey={option}>{option}</Dropdown.Item>)
+          return (<Dropdown.Item key={option} eventKey={option}>{option}</Dropdown.Item>)
         })}
       </DropdownButton>
     )

@@ -1,9 +1,13 @@
 import PropTypes from "prop-types";
 import React, { Component } from 'react';
+import { Container, Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import LoadingSpinner from './LoadingSpinner'
+import ErrorInfo from '../components/ErrorInfo'
+import LoadingSpinner from '../components/LoadingSpinner'
+import MovieDescription from '../components/MovieDescription'
+import MoviePosterDisplay from '../components/MoviePosterDisplay'
 import PopularMoviesList from './PopularMoviesList'
 
 import fetchMovieDetailAction from '../dispatch/fetchMovieDetail';
@@ -43,14 +47,18 @@ class MovieDetail extends Component {
 
   render() {
     const {movie, error} = this.props;
+    if (error) return <ErrorInfo content={error}/>
     if(!this.shouldComponentRender()) return <LoadingSpinner />
 
     return (
-      <div>
-        <h2>MovieDetail {movie.title}</h2>
+      <Container>
+        <Row>
+          <MoviePosterDisplay image={movie.poster_path} videos={movie.videos}/>
+          <MovieDescription movie={movie} />
+        </Row>
         <hr />
         <PopularMoviesList />
-      </div>
+      </Container>
     )
   }
 }
