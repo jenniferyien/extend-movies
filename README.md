@@ -3,7 +3,7 @@
 Extend Movie Listing is a website to allow users to view a list of the top 10 most popular movies from each of the last 5 years.
 
 Movies are grabbed from [The Movie Database Api](https://developers.themoviedb.org/)
-[Basic Wireframe Design](file://./asset/wireframe.pdf')
+Basic Wireframe Design can be found in the asset folder
 
 - [Dependencies](#dependencies)
 - [Setup](#setup)
@@ -66,4 +66,4 @@ Things I would modify or do if I had more time:
 
 1. **Refreshing Route** - Saving the sort order so when you refresh the same route the sort order will keep consistent
 1. **Video Page** - Actually have a separate video page with video embedded (would need to do research) to keep user on website without sending them to external site. Also would potentially need separate design for the use case in which there are multiple videos for one movie.
-1. **Test** - I would add some tests for the components, actions, etc. 
+1. **Test** - I would add some tests for the components, actions, etc.
