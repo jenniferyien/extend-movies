@@ -3,6 +3,7 @@
 Extend Movie Listing is a website to allow users to view a list of the top 10 most popular movies from each of the last 5 years.
 
 Movies are grabbed from [The Movie Database Api](https://developers.themoviedb.org/)
+<br/>
 Basic Wireframe Design can be found in the asset folder
 
 - [Dependencies](#dependencies)
