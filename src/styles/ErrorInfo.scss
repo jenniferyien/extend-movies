@@ -1,0 +1,13 @@
+.error {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  font-size: 25px;
+  font-weight: bold;
+  color: #f2f2f2;
+}

@@ -60,7 +60,7 @@ class PopularMoviesList extends Component {
     const {movies, error, year, sort_by} = this.props;
     if(error) return <ErrorInfo content={error} />
     if(!this.shouldComponentRender()) return <LoadingSpinner />
-
+    
     return (
       <Container>
         <Row className='popular-movies-list'>
