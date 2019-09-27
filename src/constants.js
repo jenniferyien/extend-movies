@@ -6,3 +6,4 @@ export const APPEND_VIDEO = 'videos'
 export const All_YEARS = [ 'All', '2019', '2018', '2017', '2016', '2015']
 export const SORT_BY = [ 'desc', 'asc' ]
 export const IMAGE_URL_BASE = 'https://image.tmdb.org/t/p/w500'
+export const VIDEO_URL_BASE = 'https://www.youtube.com/watch?v='

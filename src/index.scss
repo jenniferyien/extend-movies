@@ -1,3 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
+$dark: #182628;
+$off_white: #f2f2f2;
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Nunito Sans', sans-serif;
+  color: $off_white;
+}
+
+a, p {
+  font-family: 'Nunito', sans-serif;
+  color: $off_white;
+}
+
+body {
+  background-color: $dark
+}
+
 hr {
-  border-top: 3px solid rgba(0,0,0,.1);
+  border-top: 3px solid rgba($off_white,.5);
 }

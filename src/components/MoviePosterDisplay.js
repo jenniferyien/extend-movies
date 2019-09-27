@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 import { IMAGE_URL_BASE } from '../constants'
 import PlayIcon from './PlayIcon'
@@ -15,22 +14,22 @@ class MoviePosterDisplay extends Component {
 
   getSingleVideo() {
     const { videos } = this.props
-    // videos.results[0]
+    return videos.results[0]
   }
 
   render() {
     const { image, videos } = this.props
+    let video;
     if (videos) {
-      console.log(videos.results)
+      video = this.getSingleVideo()
     }
     return (
-      <Col lg={3}>
+      <Col lg={4} md={12} sm={12} className='poster'>
         <div className="poster-display" style={{backgroundImage: `url(${IMAGE_URL_BASE}${image})`}}>
-          {/* videos &&
-            <Link to='/movie/:id'>playlink</Link>
-          */}
+          { video &&
+            <PlayIcon videoKey={video.key} />
+          }
         </div>
-        <PlayIcon />
       </Col>
     )
   }

@@ -1,0 +1,44 @@
+$aquamarine: #65CCB8;
+$ocean_green: #57BA98;
+$off_white: #f2f2f2;
+
+.dropdown {
+  margin: auto auto 25px;
+  .btn {
+    width: 100%;
+    border-radius: 0;
+  }
+  .btn-primary {
+    color: #fff;
+    &:hover {
+      background-color: $ocean_green;
+      border-color: $ocean_green;
+    }
+    &.dropdown-toggle {
+      background-color: $aquamarine !important;
+      border-color: $aquamarine !important;
+      &::after {
+        margin-left: 10px;
+      }
+    }
+  }
+  .dropdown-menu {
+    width: 100%;
+    border-radius: 0;
+  }
+  .dropdown-item {
+    text-align: center;
+    &.active {
+      background-color: $ocean_green;
+      &:hover {
+        background-color: $ocean_green;
+      }
+    }
+    &.disabled {
+      color: $off_white;
+    }
+    &:hover {
+      background-color: rgba($ocean_green, 0.3);
+    }
+  }
+}

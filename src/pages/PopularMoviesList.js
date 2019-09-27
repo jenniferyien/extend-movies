@@ -63,7 +63,7 @@ class PopularMoviesList extends Component {
 
     return (
       <Container>
-        <Row>
+        <Row className='popular-movies-list'>
           <Col className='display-list' lg={9}>
             <Row>
               {movies.map((movie) => {
@@ -73,7 +73,7 @@ class PopularMoviesList extends Component {
               })}
             </Row>
           </Col>
-          <Col lg={3}>
+          <Col className='display-dropdown' lg={3}>
             <DropdownSelector handleSelectedChange={this.handleSelectedChange} value={year} type='year' options={All_YEARS} />
             <DropdownSelector handleSelectedChange={this.handleSelectedChange} value={sort_by} type='sort' options={SORT_BY}/>
           </Col>

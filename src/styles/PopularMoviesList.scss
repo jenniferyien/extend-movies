@@ -1,4 +1,32 @@
-.display-list {
-  padding: 0 !important;
-  margin-top: 25px;
+.popular-movies-list {
+  .display-list {
+    padding: 0 !important;
+    margin-top: 25px;
+  }
+  .display-dropdown {
+    margin-top: 25px;
+    padding-right: 0 !important;
+    padding-left: 25px !important;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .popular-movies-list {
+    flex-direction: column-reverse;
+    .display-dropdown {
+      padding-left: 0px !important;
+      display: flex;
+      align-items: center;
+      .dropdown {
+        width: 50%;
+        margin: 0;
+        &:first-child {
+          margin-right: 15px;
+        }
+        &:last-child {
+          margin-left: 15px;
+        }
+      }
+    }
+  }
 }

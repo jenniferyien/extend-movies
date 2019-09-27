@@ -1,4 +1,28 @@
 .movie-description {
   display: flex;
   align-items: center;
+  .ratings {
+    display: flex;
+    align-items: center;
+    margin: 25px 0;
+    i {
+      font-size: 25px;
+      color: #57ba98;
+      margin-right: 10px;
+    }
+    p {
+      margin-bottom: 0;
+      span {
+        color: #3b945e;
+        margin-left: 5px;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .movie-description {
+    padding: 0 25px;
+  }
 }
